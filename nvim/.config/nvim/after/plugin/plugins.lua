@@ -13,7 +13,16 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- Theme
+  -- Theme (Omarchy / aether)
+  use {
+    'bjarneo/aether.nvim',
+    branch = 'v3',
+    config = function()
+      require('me.theme').apply()
+    end,
+  }
+
+  -- Legacy themes (optional fallback)
   use { 'catppuccin/nvim', as = 'catppuccin' }
   use "EdenEast/nightfox.nvim"
   use "tjdevries/colorbuddy.nvim"

@@ -1,0 +1,20 @@
+onboarding = false
+[ui.sound]
+enabled = false
+
+[ui]
+prompt_new_tab_name = false
+
+[keys]
+rename_tab = "prefix+comma"
+previous_agent = "cmd+alt+up"
+next_agent = "cmd+alt+down"
+
+[[keys.command]]
+key = "prefix+l"
+type = "pane"
+command = "lazygit"
+
+[theme]
+name = "vesper"
+auto_switch = false

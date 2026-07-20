@@ -1,17 +1,19 @@
 [colors]
+# ash — https://omarchytheme.com/themes/ash/
 
-background = #282a36
-foreground = #f8f8f2
-red        = #ff5555
-bloodofmyenemies = #a60b00
-green      = #50fa7b
-yellow     = #f1fa8c
-blue       = #6272a4
-purple     = #bd93f9
-cyan       = #8be9fd
-orange     = #ff5555
-pink       = #ff79c6
-grey = #8fa6a1
+background = #121212
+foreground = #e0e0e0
+red        = #8a8a8a
+bloodofmyenemies = #626262
+green      = #767676
+yellow     = #9e9e9e
+blue       = #626262
+purple     = #8a8a8a
+cyan       = #767676
+orange     = #9e9e9e
+pink       = #9e9e9e
+grey       = #8a8a8a
+
 
 [bar/top]
 monitor = ${env:MONITOR:}
@@ -53,13 +55,13 @@ module-margin-left  = 0
 module-margin-right = 0
 
 ; Font
-font-0 = Iosevka:size=10;3
-font-1 = Font Awesome:style=Regular:size=12;3
+font-0 = Terminess Nerd Font:size=10;3
+font-1 = Terminess Nerd Font:size=12;3
 
 ; Modules
 modules-left   = i3
-modules-center = weather time date
-modules-right  = battery network lock logout poweroff
+modules-center = datetime
+modules-right  = network lock logout poweroff
 
 ; Cursor actions
 cursor-click  = pointer
@@ -135,30 +137,16 @@ interval = 600
 label         = %output%
 label-padding = 4
 
-[module/time]
+[module/datetime]
 type = internal/date
 
-; Update interval
 interval = 1.0
+locale = pt_BR.UTF-8
 
-; Format
-time = %%{F#fff}%H:%M:%S%%{F-}
+date = %A, %d de %B
+time = %H:%M
 
-; Label
-label         =   %time%
-label-padding = 4
-
-[module/date]
-type = internal/date
-
-; Update interval
-interval = 1.0
-
-; Format
-date = %%{F#999}%Y-%m-%d%%{F-} 
-
-; Label
-label         =   %date%
+label         =  %{F#e0e0e0}%{T1}󰥔%{T-}%{F-} %time%  %{F#8a8a8a}·%{F-}  %{F#9e9e9e}%{T1}󰃭%{T-}%{F-} %date%
 label-padding = 4
 
 [module/audio]
@@ -178,7 +166,7 @@ label-muted-padding    = 2
 type = internal/network
 
 ; Interface
-interface = wlp3s0
+interface = enp8s0
 
 ; Connected label
 label-connected            = 
@@ -199,7 +187,7 @@ content            = 
 content-padding    = 2
 
 ; Mouse click
-click-left = i3lock-fancy -f Roboto-Regular -t ""
+click-left = $HOME/Projects/dotfiles/scripts/i3lock-ash.sh
 
 [module/logout]
 type = custom/text

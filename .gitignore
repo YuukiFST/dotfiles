@@ -1,1 +1,5 @@
 fish/.config/fish/env.fish
+nix/result
+result
+scripts/__pycache__/
+*.pyc

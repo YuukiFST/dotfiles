@@ -1,0 +1,102 @@
+/**
+ * BLACK minimal — base BLACK.json
+ * Fonte: FantasqueSansM Nerd Font
+ */
+
+:root {
+    --font-ui: "FantasqueSansM Nerd Font", monospace;
+}
+
+* {
+    font-family: var(--font-ui) !important;
+    border-radius: 0 !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+[class*="markup_"] {
+    color: #efefef;
+}
+
+/* ── Nitro / Shop / Quests / Discovery ── */
+[data-list-item-id*="shop" i],
+[data-list-item-id*="quests" i],
+[data-list-item-id*="nitro" i],
+[data-list-item-id*="premium" i],
+[data-list-item-id*="discovery" i],
+a[href="/shop"],
+a[href="/store"],
+a[href="/quests"],
+a[href*="/nitro"],
+a[href="/discovery"],
+a[href="/application-directory"],
+[aria-label="Shop"],
+[aria-label="Loja"],
+[aria-label="Quests"],
+[aria-label="Missões"],
+[aria-label="Get Nitro"],
+[aria-label="Obter Nitro"],
+[aria-label="Nitro"],
+[aria-label="Discover"],
+[aria-label="Descobrir"],
+[class*="guilds"] [class*="listItem"]:has(a[href="/shop"]),
+[class*="guilds"] [class*="listItem"]:has(a[href="/quests"]),
+[class*="guilds"] [class*="listItem"]:has(a[href*="/nitro"]),
+[class*="guilds"] [class*="listItem"]:has(a[href="/store"]),
+[class*="toolbar"] [aria-label="Shop"],
+[class*="toolbar"] [aria-label="Loja"],
+[class*="toolbar"] [aria-label="Quests"],
+[class*="toolbar"] [aria-label="Missões"] {
+    display: none !important;
+}
+
+/* ── Help ── */
+[aria-label="Help"],
+[aria-label="Ajuda"] {
+    display: none !important;
+}
+
+/* ── Gift no chat (ao lado do GIF) ── */
+button[aria-label="Send a gift"],
+button[aria-label="Enviar um presente"],
+button[aria-label="Send a gift" i],
+button[aria-label="Enviar um presente" i],
+[class*="giftButton"] {
+    display: none !important;
+}
+
+/* ── Settings: seção Billing (precisa ThemeAttributes ligado) ── */
+[class*="header"]:has(+ [data-tab-id="Subscriptions"]),
+[class*="header"]:has(+ [data-tab-id="Discord Nitro"]),
+[class*="header"]:has(+ [class*="item"] a[href="/settings/subscriptions"]),
+[data-tab-id="Discord Nitro"],
+[data-tab-id="Subscriptions"],
+[data-tab-id="Gift Inventory"],
+[data-tab-id="Billing"],
+[class*="item"][data-tab-id="Discord Nitro"],
+[class*="item"][data-tab-id="Subscriptions"],
+[class*="item"][data-tab-id="Gift Inventory"],
+[class*="item"][data-tab-id="Billing"],
+a[href="/settings/subscriptions"],
+a[href="/settings/premium"],
+a[href="/settings/gifts"],
+a[href="/settings/gift-inventory"],
+a[href="/settings/billing"],
+[aria-label="Subscriptions"],
+[aria-label="Assinaturas"],
+[aria-label="Gift Inventory"],
+[aria-label="Inventário de presentes"],
+[aria-label="Billing"],
+[aria-label="Cobrança"],
+[class*="standardSidebarView"] [class*="item"]:has(a[href="/settings/subscriptions"]),
+[class*="standardSidebarView"] [class*="item"]:has(a[href="/settings/premium"]),
+[class*="standardSidebarView"] [class*="item"]:has(a[href="/settings/gifts"]),
+[class*="standardSidebarView"] [class*="item"]:has(a[href="/settings/gift-inventory"]),
+[class*="standardSidebarView"] [class*="item"]:has(a[href="/settings/billing"]),
+[class*="side"] [class*="item"]:has(a[href="/settings/subscriptions"]),
+[class*="side"] [class*="item"]:has(a[href="/settings/gift-inventory"]),
+[class*="side"] [class*="item"]:has(a[href="/settings/billing"]),
+[data-tab-id="Billing"] + [class*="separator"],
+[class*="item"]:has(a[href="/settings/billing"]) + [class*="separator"] {
+    display: none !important;
+}

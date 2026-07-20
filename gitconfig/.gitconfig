@@ -1,7 +1,6 @@
 [user]
-	name = bashbunni
-	email = bunni@bashbunni.dev
-	signingkey = /home/bashbunni/.ssh/id_ed25519
+	name = yuuki
+	email = yuuki@localhost
 [init]
 	defaultBranch = main
 [pull]
@@ -9,10 +8,12 @@
 [core]
 	editor = nvim --clean
 	excludesfile = $HOME/.gitignore_global
+	hooksPath = /home/yuuki/Projects/my-harness-config/git-hooks
 [commit]
-	gpgsign = true
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+	gpgsign = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = ssh://git@github.com/
 
 [alias]
 	st = status
@@ -23,5 +24,3 @@
 	wl = worktree list
 	wd = worktree remove
 	pretty = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-[gpg]
-	format = ssh

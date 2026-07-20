@@ -1,0 +1,17 @@
+{
+  "customTitleBar": false,
+  "disableMinSize": true,
+  "tray": false,
+  "minimizeToTray": false,
+  "checkUpdates": true,
+  "enableSplashScreen": false,
+  "enableMenu": false,
+  "splashBackground": "#000000",
+  "splashColor": "#e7e9ea",
+  "splashTheming": true,
+  "staticTitle": true,
+  "hardwareAcceleration": true,
+  "hardwareVideoAcceleration": true,
+  "discordBranch": "stable",
+  "arRPC": false
+}

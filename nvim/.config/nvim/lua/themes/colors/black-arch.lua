@@ -1,0 +1,36 @@
+return {
+  bg         = "#080808",
+  dark_bg    = "#262626",
+  darker_bg  = "#262626",
+  lighter_bg = "#262626",
+
+  fg         = "#A6A6A6",
+  dark_fg    = "#646464",
+  light_fg   = "#D4D4D4",
+  bright_fg  = "#D4D4D4",
+  muted      = "#B9B9B9",
+
+  red        = "#646464",
+  yellow     = "#B9B9B9",
+  orange     = "#747474",
+  green      = "#8E8E8E",
+  cyan       = "#585858",
+  blue       = "#989898",
+  purple     = "#747474",
+  brown      = "#646464",
+
+  bright_red    = "#646464",
+  bright_yellow = "#B9B9B9",
+  bright_green  = "#8E8E8E",
+  bright_cyan   = "#585858",
+  bright_blue   = "#989898",
+  bright_purple = "#747474",
+
+  accent               = "#989898",
+  cursor               = "#FFFFFF",
+  foreground           = "#A6A6A6",
+  background           = "#080808",
+  selection            = "#262626",
+  selection_foreground = "#000000",
+  selection_background = "#FFFFFF",
+}

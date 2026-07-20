@@ -1,0 +1,59 @@
+Windows
+—
+Super+W               Close window
+Ctrl+Alt+Delete       Close all windows
+Super+T               Toggle floating/tiling
+Super+J               Toggle split
+Super+F               Fullscreen
+Super+Ctrl+F          Tiled fullscreen (fill tile)
+Super+Alt+F           Maximize (full width)
+Super+O               Pop window (float + pin)
+Super+I               Toggle window opacity
+Super+L               Toggle workspace layout
+Super+S               Scratchpad
+Super+Alt+S           Move to scratchpad
+Super+Shift+Arrows    Swap window
+Super+Left/Right      Previous/next workspace
+Super+Up/Down         Focus window
+Super+Tab             Next workspace
+Super+Shift+Tab       Previous workspace
+Super+Ctrl+Tab        Former workspace
+
+Apps
+—
+Super+Return          Ghostty
+Super+Alt+Return      Herdr
+Super+grave           Herdr
+Super+Shift+Return    Thorium
+Super+Shift+Alt+B     Thorium (private)
+Super+Shift+F         Nautilus
+Super+Shift+Alt+F     Nautilus (cwd)
+Super+Shift+N         Neovim
+Super+Shift+A         Pi (AI)
+Super+Shift+O         Obsidian
+Super+Shift+G         Discord
+Super+Shift+/         KeePassXC
+
+Clipboard
+—
+Super+C               Copy
+Super+X               Cut
+Super+V               Paste
+Super+Ctrl+V          Clipboard history
+
+System
+—
+Super+Space           App launcher
+Super+Alt+Space       System menu
+Super+Escape          System menu
+Super+K               This list
+Super+Ctrl+L          Lock
+Super+Ctrl+Shift+Space  Pick theme
+Super+Ctrl+N            Admin menu (NixOS + disk)
+Super+Ctrl+Space      Pick background
+Super+Ctrl+A          Audio
+Super+Ctrl+B          Bluetooth
+Super+Ctrl+W          Wi-Fi
+Super+Ctrl+T          btop
+Super+Ctrl+C          Capture menu
+Super+Print           Screenshot
