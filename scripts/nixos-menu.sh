@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# Rofi: NixOS rebuild + disk tools.
+# Super+Ctrl+N — Thorium tools + NixOS admin.
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
 TERM_CMD="${TERMINAL:-ghostty}"
+COPY_TABS="$DOTFILES/scripts/copy-incognito-tabs.sh"
+OPEN_LINKS="$DOTFILES/scripts/open-clipboard-links-incognito.py"
 DISK_NOTIFY="$DOTFILES/scripts/disk-startup-notify.sh"
 DISK_CLEANUP="$DOTFILES/scripts/disk-cleanup.sh"
 
@@ -40,30 +42,39 @@ run_disk_cleanup() {
 }
 
 choice=$(printf '%s\n' \
-  "Apply configuration (switch)" \
-  "Apply + update flake" \
-  "Build only (no switch)" \
-  "Disk usage (notification)" \
-  "Clean disk now" \
-  "Cancel" | rofi -dmenu -i -p "Admin") || exit 0
+  "Thorium · Copy Incognito Tab URLs" \
+  "Thorium · Open Clipboard Links in Incognito" \
+  "────────────" \
+  "NixOS · Apply configuration (switch)" \
+  "NixOS · Apply + update flake" \
+  "NixOS · Build only (no switch)" \
+  "NixOS · Disk usage (notification)" \
+  "NixOS · Clean disk now" \
+  "Cancel" | rofi -dmenu -i -p "Tools") || exit 0
 
 case "${choice:-Cancel}" in
-  "Apply configuration (switch)")
+  "Thorium · Copy Incognito Tab URLs")
+    "$COPY_TABS"
+    ;;
+  "Thorium · Open Clipboard Links in Incognito")
+    python3 "$OPEN_LINKS"
+    ;;
+  "NixOS · Apply configuration (switch)")
     notify-send -a nixos "NixOS" "Opening rebuild…" 2>/dev/null || true
     run_rebuild
     ;;
-  "Apply + update flake")
+  "NixOS · Apply + update flake")
     notify-send -a nixos "NixOS" "Updating flake + rebuild…" 2>/dev/null || true
     run_rebuild --pull
     ;;
-  "Build only (no switch)")
+  "NixOS · Build only (no switch)")
     notify-send -a nixos "NixOS" "Test build…" 2>/dev/null || true
     run_rebuild --build
     ;;
-  "Disk usage (notification)")
+  "NixOS · Disk usage (notification)")
     "$DISK_NOTIFY" || true
     ;;
-  "Clean disk now")
+  "NixOS · Clean disk now")
     run_disk_cleanup
     ;;
   *) ;;

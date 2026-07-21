@@ -1,5 +1,6 @@
 Windows
 —
+Super+Q               Close window
 Super+W               Close window
 Ctrl+Alt+Delete       Close all windows
 Super+T               Toggle floating/tiling
@@ -49,7 +50,7 @@ Super+Escape          System menu
 Super+K               This list
 Super+Ctrl+L          Lock
 Super+Ctrl+Shift+Space  Pick theme
-Super+Ctrl+N            Admin menu (NixOS + disk)
+Super+Ctrl+N            Tools (Thorium + NixOS)
 Super+Ctrl+Space      Pick background
 Super+Ctrl+A          Audio
 Super+Ctrl+B          Bluetooth
