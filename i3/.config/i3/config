@@ -82,7 +82,8 @@ bindsym $mod+Shift+g exec --no-startup-id discord
 bindsym F1 exec --no-startup-id $HOME/.config/emacs/bin/doom run
 
 # --- navigating ---
-bindsym $mod+w kill
+bindsym $mod+q exec --no-startup-id $scripts/window-under-cursor.sh kill
+bindsym $mod+w exec --no-startup-id $scripts/window-under-cursor.sh kill
 bindsym Control+Mod1+Delete exec --no-startup-id $scripts/kill-all-windows.sh
 bindsym $mod+t floating toggle
 bindsym $mod+j layout toggle split
