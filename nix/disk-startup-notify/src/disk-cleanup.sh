@@ -205,6 +205,22 @@ clean_user_dir "Trash metadata" "${HOME}/.local/share/Trash/info"
 clean_user_dir "App caches" "${HOME}/.cache"
 clean_user_cache_cmd "npm cache" npm cache clean --force
 clean_user_cache_cmd "pip cache" pip cache purge
+
+# Regenerable build caches (safe; next build re-downloads)
+clean_user_dir "Gradle caches" "${HOME}/.gradle/caches"
+clean_user_dir "Gradle daemon" "${HOME}/.gradle/daemon"
+clean_user_dir "Gradle tmp" "${HOME}/.gradle/.tmp"
+clean_user_dir "Gradle JDKs" "${HOME}/.gradle/jdks"
+clean_user_dir "Gradle wrapper" "${HOME}/.gradle/wrapper"
+clean_user_cache_cmd "Go build cache" go clean -cache
+clean_user_dir "Cargo registry cache" "${HOME}/.cargo/registry/cache"
+clean_user_dir "Cargo registry src" "${HOME}/.cargo/registry/src"
+clean_user_dir "Cargo git db" "${HOME}/.cargo/git/db"
+clean_user_dir "Cargo git checkouts" "${HOME}/.cargo/git/checkouts"
+clean_user_cache_cmd "uv cache" uv cache clean
+clean_user_cache_cmd "yarn cache" yarn cache clean
+clean_user_cache_cmd "pnpm store" pnpm store prune
+
 run_root_cleanup || true
 
 read -r after_total after_used after_free < <(read_disk_stats)
