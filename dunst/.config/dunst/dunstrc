@@ -32,19 +32,19 @@
 
 # BEGIN THEME_COLORS
 [global]
-    frame_color = "#626262"
+    frame_color = "#b2fff3"
 
 [urgency_low]
-    background = "#121212"
-    foreground = "#e0e0e0"
+    background = "#05080a"
+    foreground = "#fff6ff"
 
 [urgency_normal]
-    background = "#121212"
-    foreground = "#e0e0e0"
+    background = "#05080a"
+    foreground = "#fff6ff"
 
 [urgency_critical]
-    background = "#3c3c3c"
-    foreground = "#ffffff"
-    frame_color = "#8a8a8a"
+    background = "#5c3c48"
+    foreground = "#ffe1e1"
+    frame_color = "#ff9fbc"
 
 # END THEME_COLORS

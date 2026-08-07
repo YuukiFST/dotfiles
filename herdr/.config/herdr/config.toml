@@ -1,20 +1,45 @@
 onboarding = false
+
 [ui.sound]
 enabled = false
 
 [ui]
 prompt_new_tab_name = false
+agent_panel_sort = "spaces"
 
 [keys]
+# kunchenguid/dotfiles — tmux-style prefix
+prefix = "ctrl+b"
+
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+split_horizontal = "prefix+double_quote"
+split_vertical = "prefix+percent"
+new_tab = "prefix+c"
+close_tab = "prefix+ampersand"
+workspace_picker = "prefix+w"
+goto = "prefix+g"
+copy_mode = "prefix+y"
+
 rename_tab = "prefix+comma"
 previous_agent = "cmd+alt+up"
 next_agent = "cmd+alt+down"
 
 [[keys.command]]
-key = "prefix+l"
+key = "prefix+shift+g"
 type = "pane"
 command = "lazygit"
 
 [theme]
-name = "vesper"
+name = "terminal"
 auto_switch = false
+
+[theme.custom]
+panel_bg = "#05080a"
+accent = "#b2fff3"
+red = "#ff9fbc"
+green = "#baf7b5"
+yellow = "#fff6c3"

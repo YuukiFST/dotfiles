@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 
-(setq doom-font (font-spec :family "Terminess Nerd Font" :size 25 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "Terminess Nerd Font" :size 25))
+(setq doom-font (font-spec :family "Terminess Nerd Font" :size 12 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 12))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -111,12 +111,9 @@
 ;; (require 'pbcopy)
 ;; (turn-on-pbcopy)
 
-;; x11
-(use-package! xclip
-  :config
-  (setq xclip-mode t)
-  (setq xclip-select-enable-clipboard t)
-  (setq xclip-method 'xclip))
+;; x11 clipboard (GUI Emacs; sem pacote xclip)
+(when (display-graphic-p)
+  (setq x-select-enable-clipboard t))
 
 ;; use fish shell by default
 (setq explicit-shell-file-name "/run/current-system/sw/bin/fish")

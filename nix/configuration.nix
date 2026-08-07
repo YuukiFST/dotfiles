@@ -12,7 +12,8 @@
     timeout = 8;
     systemd-boot = {
       enable = true;
-      configurationLimit = 1;
+      # Keep a few generations while swapping GPU drivers (nouveau → nvidia).
+      configurationLimit = 5;
       windows."11" = {
         title = "Windows";
         # ESP de 100MB em sdb3. Se não bootar, habilite edk2-uefi-shell e rode `map -c`.
@@ -279,6 +280,16 @@
     "nix-command"
     "flakes"
   ];
+
+  # RTX 3060 (GA106): proprietary driver. nouveau GSP/DP-2 errors correlated with
+  # hard black-screen hangs after idle (keyboard/mouse dead until reboot).
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = true; # Ampere+: NixOS recommends open kernel modules on Turing+
+    nvidiaSettings = true;
+  };
 
   services.disk-startup-notify = {
     enable = true;

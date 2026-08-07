@@ -5,7 +5,7 @@ set -euo pipefail
 DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
 action="${1:?usage: window-under-cursor.sh kill|fullscreen|fullscreen-global}"
 
-"$DOTFILES/scripts/focus-under-cursor.sh"
+"$DOTFILES/scripts/focus-under-cursor.sh" || true
 
 case "$action" in
   kill) i3-msg kill >/dev/null ;;

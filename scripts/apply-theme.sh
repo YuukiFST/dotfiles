@@ -95,14 +95,22 @@ if [[ -f "$DOTFILES/scripts/theme-apply-desktop.sh" && -f "$THEME_DIR/colors.tom
   python3 "$DOTFILES/scripts/theme-apply-desktop.sh" "$THEME_DIR" "$DOTFILES"
 fi
 
+if [[ -f "$DOTFILES/scripts/theme-apply-system.py" && -f "$THEME_DIR/colors.toml" ]]; then
+  python3 "$DOTFILES/scripts/theme-apply-system.py" "$THEME_DIR" "$DOTFILES"
+fi
+
+sleep 0.1
 "$DOTFILES/scripts/reload-ghostty.sh" || true
 
 if [[ -x "$DOTFILES/scripts/start-picom.sh" ]]; then
   "$DOTFILES/scripts/start-picom.sh" >/dev/null 2>&1 || true
 fi
 
+POLYBAR_LAUNCH="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh"
 if command -v polybar-msg >/dev/null 2>&1; then
-  polybar-msg cmd restart >/dev/null 2>&1 || true
+  polybar-msg cmd restart >/dev/null 2>&1 || "$POLYBAR_LAUNCH" >/dev/null 2>&1 &
+else
+  [[ -x "$POLYBAR_LAUNCH" ]] && "$POLYBAR_LAUNCH" >/dev/null 2>&1 &
 fi
 
 if command -v i3-msg >/dev/null 2>&1; then
@@ -130,10 +138,4 @@ if [[ -n "$PREVIOUS_THEME" && "$PREVIOUS_THEME" == "$THEME" ]]; then
   status="reaplicado"
 fi
 
-accent="$(grep -m1 '^accent ' "$THEME_DIR/colors.toml" 2>/dev/null | sed 's/.*"\(#.*\)".*/\1/' || true)"
-bg="$(grep -m1 '^background ' "$THEME_DIR/colors.toml" 2>/dev/null | sed 's/.*"\(#.*\)".*/\1/' || true)"
-
-summary="i3 · polybar · ghostty · rofi · dunst · btop · nvim"
-[[ -n "$bg" ]] && summary="$summary\nCor: $bg · accent $accent"
-notify_theme -u normal "Tema $status: $THEME" "$summary\nWallpaper: $wp_label"
 echo "apply-theme: $status '$THEME' (wallpaper: $wp_label)"

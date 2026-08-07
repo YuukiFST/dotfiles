@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    herdr.url = "github:ogulcancelik/herdr/v0.7.3";
+    herdr.url = "github:ogulcancelik/herdr/v0.8.0";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     custom-packages.url = "github:Rishabh5321/custom-packages-flake";
     disk-startup-notify.url = "path:./disk-startup-notify";

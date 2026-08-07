@@ -1,0 +1,3 @@
+btop ~
+./run.sh  /m/O/P/P/kotodama-type
+./run.sh /m/O/P/P/kotodama-type

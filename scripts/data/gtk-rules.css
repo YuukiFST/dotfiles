@@ -1,0 +1,76 @@
+    messagedialog {
+        background-color: @dialog_bg_color;
+    }
+
+    messagedialog label {
+        color: @dialog_fg_color;
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    messagedialog .secondary-text {
+        font-size: 10pt;
+        font-style: italic;
+    }
+
+    messagedialog button {
+        background-color: @black;
+        color: @foreground;
+        border: 1px solid @bright_black;
+        padding: 10px;
+    }
+
+    messagedialog button:hover {
+        background-color: @blue;
+    }
+
+    banner revealer widget {
+        background: @bright_black;
+        padding: 5px;
+        color: @foreground;
+    }
+
+    alertdialog.background {
+        background-color: @dialog_bg_color;
+        color: @dialog_fg_color;
+    }
+
+    alertdialog .titlebar {
+        background-color: @headerbar_bg_color;
+        color: @headerbar_fg_color;
+    }
+
+    alertdialog box {
+        background-color: @dialog_bg_color;
+    }
+
+    alertdialog label {
+        color: @dialog_fg_color;
+    }
+
+    filechooser .dialog-action-box {
+        border-top: 1px solid @bright_black;
+    }
+
+    filechooser .dialog-action-box:backdrop {
+        border-top-color: @black;
+    }
+
+    filechooser #pathbarbox {
+        border-bottom: 1px solid @bright_black;
+    }
+
+    filechooserbutton:drop(active) {
+        box-shadow: none;
+        border-color: transparent;
+    }
+
+    toast {
+        background-color: @black;
+        color: @foreground;
+    }
+
+    toast button.circular.flat.image-button:hover {
+        color: @background;
+        background-color: @red;
+    }

@@ -32,8 +32,4 @@ if [[ ! -d "$DOTFILES/themes/$choice" ]]; then
   exit 1
 fi
 
-if [[ "$choice" == "$CURRENT" ]]; then
-  notify-send -a "dotfiles-theme" -u low "Tema" "Reaplicando $choice…" 2>/dev/null || true
-fi
-
 "$DOTFILES/scripts/apply-theme.sh" "$choice"

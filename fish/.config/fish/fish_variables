@@ -1,4 +1,4 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/yuuki/\x2elocal/bin\x1e/home/yuuki/\x2epi/agent/node_modules/\x2ebin
+SETUVAR fish_user_paths:/home/yuuki/\x2elocal/bin\x1e/home/yuuki/\x2enpm\x2dglobal/bin\x1e/home/yuuki/\x2epi/agent/node_modules/\x2ebin

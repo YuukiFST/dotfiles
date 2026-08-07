@@ -1,21 +1,22 @@
 [colors]
-# ash — https://omarchytheme.com/themes/ash/
+# saga — https://omarchytheme.com/themes/saga/
 
-background = #121212
-foreground = #e0e0e0
-red        = #8a8a8a
-bloodofmyenemies = #626262
-green      = #767676
-yellow     = #9e9e9e
-blue       = #626262
-purple     = #8a8a8a
-cyan       = #767676
-orange     = #9e9e9e
-pink       = #9e9e9e
-grey       = #8a8a8a
+background = #05080a
+foreground = #fff6ff
+red        = #ff9fbc
+bloodofmyenemies = #b2fff3
+green      = #baf7b5
+yellow     = #fff6c3
+blue       = #b2fff3
+purple     = #ff9fbc
+cyan       = #ffc79b
+orange     = #fff6c3
+pink       = #fff6c3
+grey       = #ff9fbc
 
 
 [bar/top]
+enable-ipc = true
 monitor = ${env:MONITOR:}
 ; Size
 width  = 100%

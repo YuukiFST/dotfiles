@@ -6,7 +6,8 @@ if ! command -v ghostty >/dev/null 2>&1; then
   exit 0
 fi
 
-if ! pgrep -x ghostty >/dev/null 2>&1; then
+mapfile -t pids < <(pgrep -x ghostty || true)
+if ((${#pids[@]} == 0)); then
   exit 0
 fi
 
@@ -16,6 +17,6 @@ if command -v systemctl >/dev/null 2>&1 \
   exit 0
 fi
 
-while read -r pid; do
+for pid in "${pids[@]}"; do
   kill -s USR2 "$pid" 2>/dev/null || true
-done < <(pgrep -x ghostty)
+done

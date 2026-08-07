@@ -14,4 +14,12 @@ PI_EXCLUDE_TOOLS="${PI_EXCLUDE_TOOLS:-fd,rg,fffind,ffgrep,crawl,scrape,search,wo
 
 export PI_FFF_MODE="${PI_FFF_MODE:-override}"
 
+# --exclude-tools before a subcommand breaks its flags (e.g. update --extensions).
+pi_cli_subcmd="${1-}"
+case "$pi_cli_subcmd" in
+  install|remove|uninstall|update|list|config)
+    exec "$PI_BIN" "$@"
+    ;;
+esac
+
 exec "$PI_BIN" --exclude-tools "$PI_EXCLUDE_TOOLS" "$@"

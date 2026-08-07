@@ -14,6 +14,7 @@ end
 
 function M.apply()
   local name = current_theme_name()
+  package.loaded["themes.colors." .. name] = nil
   local ok_colors, colors = pcall(require, "themes.colors." .. name)
   if not ok_colors then
     vim.notify("Theme colors missing for: " .. name, vim.log.levels.WARN)
@@ -30,5 +31,23 @@ function M.apply()
   vim.cmd.colorscheme("aether")
   return true
 end
+
+local revision_file = vim.fn.expand("~/.config/dotfiles/theme-revision")
+local last_revision = ""
+
+local function maybe_reload()
+  if vim.fn.filereadable(revision_file) == 0 then
+    return
+  end
+  local rev = vim.fn.readfile(revision_file)[1] or ""
+  if rev ~= "" and rev ~= last_revision then
+    last_revision = rev
+    M.apply()
+  end
+end
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  callback = maybe_reload,
+})
 
 return M
