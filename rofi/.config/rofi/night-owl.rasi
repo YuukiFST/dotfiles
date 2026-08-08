@@ -110,12 +110,12 @@ element normal.urgent {
 
 element normal.active {
     background-color: @active;
-    text-color:       @foreground;
+    text-color:       @background;
 }
 
 element selected.normal {
     background-color: @selected;
-    text-color:       @foreground;
+    text-color:       @background;
 }
 
 element selected.urgent {
@@ -125,7 +125,7 @@ element selected.urgent {
 
 element selected.active {
     background-color: @active;
-    text-color:       @foreground;
+    text-color:       @background;
 }
 
 element-icon {
