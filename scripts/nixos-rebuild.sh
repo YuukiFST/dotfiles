@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Rebuild NixOS a partir dos dotfiles — sem copiar manualmente para /etc/nixos.
-# Rode num terminal normal (Ghostty, tty); o terminal do Cursor não tem sudo.
+# Rebuild NixOS from the dotfiles — no manual copy to /etc/nixos needed.
+# Run from a regular terminal (Ghostty, tty); the Cursor terminal has no sudo.
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
@@ -11,22 +11,22 @@ DO_SYNC=false
 
 usage() {
   cat <<'EOF'
-Uso: nixos-rebuild.sh [opções]
+Usage: nixos-rebuild.sh [options]
 
-Rebuild direto do flake em ~/Projects/dotfiles/nix (fonte única da verdade).
+Rebuild directly from the flake in ~/Projects/dotfiles/nix (single source of truth).
 
-Opções:
-  -b, --build       Só compila (nixos-rebuild build)
-  -t, --test        Testa sem aplicar (nixos-rebuild test)
-      --boot        Ativa no próximo boot (nixos-rebuild boot)
-  -p, --pull        Atualiza flake inputs antes (nix flake update)
-  -s, --sync        Também copia configs para /etc/nixos (legado)
-  -h, --help        Mostra esta ajuda
+Options:
+  -b, --build       Build only (nixos-rebuild build)
+  -t, --test        Test without applying (nixos-rebuild test)
+      --boot        Activate on next boot (nixos-rebuild boot)
+  -p, --pull        Update flake inputs first (nix flake update)
+  -s, --sync        Also copy configs to /etc/nixos (legacy)
+  -h, --help        Show this help
 
-Exemplos:
-  nixos-rebuild.sh           # switch (o mais comum)
+Examples:
+  nixos-rebuild.sh           # switch (most common)
   nixos-rebuild.sh -p        # update inputs + switch
-  nixos-rebuild.sh -b        # só build, sem aplicar
+  nixos-rebuild.sh -b        # build only, no switch
 EOF
 }
 
@@ -48,17 +48,17 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! -f "$NIX_DIR/flake.nix" ]]; then
-  echo "flake não encontrado em $NIX_DIR" >&2
+  echo "flake not found at $NIX_DIR" >&2
   exit 1
 fi
 
 if $DO_PULL; then
-  echo "==> Atualizando flake inputs"
+  echo "==> Updating flake inputs"
   (cd "$NIX_DIR" && nix flake update)
 fi
 
 if $DO_SYNC; then
-  echo "==> Sincronizando $NIX_DIR -> /etc/nixos"
+  echo "==> Syncing $NIX_DIR -> /etc/nixos"
   sudo mkdir -p /etc/nixos
   for f in flake.nix flake.lock configuration.nix hardware-configuration.nix filesystems.nix; do
     if [[ -f "$NIX_DIR/$f" ]]; then
