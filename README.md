@@ -27,6 +27,8 @@ System config lives in `nix/`. Edit `nix/configuration.nix`, then rebuild:
 - `Super+Ctrl+N` → Tools menu (NixOS rebuild, disk cleanup, Thorium scripts)
 - or `./scripts/nixos-rebuild.sh`
 
+Disk cleanup and login notifications are built into this repo under `nix/disk-startup-notify/` (no extra clone needed).
+
 ## Stow packages
 
 `doom`, `fish`, `ghostty`, `gitconfig`, `herdr`, `i3`, `nvim`, `picom`, `polybar`, `rofi`, `ssh`, `tmux`, `zsh`

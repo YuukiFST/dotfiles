@@ -40,20 +40,6 @@ let
       '';
   };
 
-  notifyText =
-    builtins.replaceStrings
-      [
-        "@threshold@"
-        "@mount@"
-        "@dunstWait@"
-      ]
-      [
-        (toString lowSpaceThresholdGb)
-        mountPoint
-        (toString dunstWaitSeconds)
-      ]
-      (builtins.readFile ./src/disk-startup-notify.sh);
-
   diskStartupNotify = writeShellApplication {
     name = "disk-startup-notify";
     runtimeInputs = [
@@ -63,7 +49,13 @@ let
       rofi
       diskCleanup
     ];
-    text = notifyText;
+    text = ''
+      export DISK_STARTUP_NOTIFY_THRESHOLD_GB="${toString lowSpaceThresholdGb}"
+      export DISK_STARTUP_NOTIFY_MOUNT="${mountPoint}"
+      export DISK_STARTUP_NOTIFY_DUNST_WAIT="${toString dunstWaitSeconds}"
+      export DISK_CLEANUP="${diskCleanup}/bin/disk-cleanup"
+      ${builtins.readFile ./src/disk-startup-notify.sh}
+    '';
   };
 in
 {

@@ -1,6 +1,9 @@
 # disk-startup-notify
 
-Shows disk usage on graphical login and offers optional safe cleanup.
+Disk usage notification on graphical login with optional safe cleanup.
+
+**Source of truth:** `nix/disk-startup-notify/` inside this dotfiles repo.
+There is no separate repository required for NixOS install.
 
 ## Features
 
@@ -11,7 +14,7 @@ Shows disk usage on graphical login and offers optional safe cleanup.
 
 ## NixOS module
 
-Enable in `configuration.nix`:
+Enabled in `nix/configuration.nix`:
 
 ```nix
 services.disk-startup-notify = {
@@ -20,7 +23,7 @@ services.disk-startup-notify = {
 };
 ```
 
-Add to i3 startup:
+Add to i3 startup (`i3/.config/i3/config`):
 
 ```
 exec --no-startup-id disk-startup-notify
@@ -29,8 +32,15 @@ exec --no-startup-id disk-startup-notify
 After changes, rebuild:
 
 ```bash
-sudo nixos-rebuild switch
+./scripts/nixos-rebuild.sh
 ```
+
+## Scripts layout
+
+| Path | Role |
+|------|------|
+| `nix/disk-startup-notify/src/*.sh` | Canonical implementation (embedded in Nix packages) |
+| `scripts/disk-*.sh` | Thin wrappers: use system packages when available, else source tree |
 
 ## Sudo
 

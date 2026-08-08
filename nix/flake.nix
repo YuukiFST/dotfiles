@@ -6,7 +6,6 @@
     herdr.url = "github:ogulcancelik/herdr/v0.8.0";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     custom-packages.url = "github:Rishabh5321/custom-packages-flake";
-    disk-startup-notify.url = "path:./disk-startup-notify";
   };
 
   outputs =
@@ -17,7 +16,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
-          inputs.disk-startup-notify.nixosModules.default
+          ./disk-startup-notify/module.nix
           {
             nixpkgs.overlays = [
               herdr.overlays.default

@@ -7,8 +7,8 @@ DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
 TERM_CMD="${TERMINAL:-ghostty}"
 COPY_TABS="$DOTFILES/scripts/copy-incognito-tabs.sh"
 OPEN_LINKS="$DOTFILES/scripts/open-clipboard-links-incognito.py"
-DISK_NOTIFY="$DOTFILES/scripts/disk-startup-notify.sh"
-DISK_CLEANUP="$DOTFILES/scripts/disk-cleanup.sh"
+DISK_NOTIFY="$(command -v disk-startup-notify 2>/dev/null || echo "$DOTFILES/scripts/disk-startup-notify.sh")"
+DISK_CLEANUP="$(command -v disk-cleanup 2>/dev/null || echo "$DOTFILES/scripts/disk-cleanup.sh")"
 
 ACCEPT="Right,Control+j,Control+m,Return,KP_Enter"
 

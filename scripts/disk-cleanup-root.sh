@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-# Root-only cleanup steps. Invoked via passwordless sudo (disk-cleanup-root).
+# Wrapper: prefer NixOS packaged disk-cleanup-root; else run dotfiles source.
 set -euo pipefail
 
-NIX_COLLECT_GARBAGE="${NIX_COLLECT_GARBAGE:-/run/current-system/sw/bin/nix-collect-garbage}"
-NIX_STORE="${NIX_STORE:-/run/current-system/sw/bin/nix-store}"
-JOURNALCTL="${JOURNALCTL:-/run/current-system/sw/bin/journalctl}"
+DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
+SRC="$DOTFILES/nix/disk-startup-notify/src"
 
-"$NIX_COLLECT_GARBAGE" -d
-"$NIX_STORE" --optimise
-"$JOURNALCTL" --vacuum-time=7d
+if command -v disk-cleanup-root >/dev/null 2>&1; then
+  exec disk-cleanup-root "$@"
+fi
+
+export NIX_COLLECT_GARBAGE="${NIX_COLLECT_GARBAGE:-/run/current-system/sw/bin/nix-collect-garbage}"
+export NIX_STORE="${NIX_STORE:-/run/current-system/sw/bin/nix-store}"
+export JOURNALCTL="${JOURNALCTL:-/run/current-system/sw/bin/journalctl}"
+exec bash "$SRC/disk-cleanup-root.sh"
