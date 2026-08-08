@@ -1,10 +1,12 @@
+#!/usr/bin/env bash
 set -euo pipefail
 
-THRESHOLD_GB=@threshold@
-MOUNT="@mount@"
-DUNST_WAIT_SEC=@dunstWait@
+THRESHOLD_GB="${DISK_STARTUP_NOTIFY_THRESHOLD_GB:-15}"
+MOUNT="${DISK_STARTUP_NOTIFY_MOUNT:-/}"
+DUNST_WAIT_SEC="${DISK_STARTUP_NOTIFY_DUNST_WAIT:-3}"
 APP_ID="disk-startup-notify"
 LOCK_FILE="${XDG_RUNTIME_DIR:-/tmp}/disk-startup-notify.lock"
+DISK_CLEANUP="${DISK_CLEANUP:-disk-cleanup}"
 
 exec 9>"$LOCK_FILE"
 if ! flock -n 9; then
@@ -66,7 +68,7 @@ case "${choice:-}" in
 
     case "${confirm:-}" in
       "Yes, clean now")
-        disk-cleanup || true
+        "$DISK_CLEANUP" || true
         ;;
     esac
     ;;
