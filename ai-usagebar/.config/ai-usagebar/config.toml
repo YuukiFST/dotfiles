@@ -1,0 +1,25 @@
+# Stow → ~/.config/ai-usagebar/config.toml
+# Cursor reads IDE login (state.vscdb). No API key here.
+
+[ui]
+primary = "cursor"
+
+[anthropic]
+enabled = false
+
+[openai]
+enabled = false
+
+[zai]
+enabled = false
+
+[openrouter]
+enabled = false
+
+[cursor]
+enabled = true
+
+# Paid OpenCode Go only. Free daily quota has no remaining-count API.
+# [opencode-go]
+# enabled = true
+# api_key_env = "OPENCODE_GO_API_KEY"

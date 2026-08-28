@@ -4,6 +4,7 @@ set -euo pipefail
 DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
 
 STOW_PACKAGES=(
+  ai-usagebar
   doom
   dunst
   fish

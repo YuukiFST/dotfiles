@@ -56,7 +56,6 @@ bindsym $mod+Alt+space exec --no-startup-id $scripts/system-menu.sh
 bindsym $mod+Escape exec --no-startup-id $scripts/system-menu.sh
 bindsym $mod+k exec --no-startup-id $scripts/hotkeys.sh
 bindsym $mod+Control+Shift+space exec --no-startup-id $scripts/theme-menu.sh
-bindsym $mod+Control+n exec --no-startup-id $scripts/nixos-menu.sh
 bindsym $mod+Control+space exec --no-startup-id $scripts/background-menu.sh
 bindsym $mod+Control+l exec --no-startup-id $scripts/i3lock-ash.sh
 

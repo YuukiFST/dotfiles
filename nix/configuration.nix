@@ -78,6 +78,15 @@
 
   services.desktopManager.gnome.enable = true;
 
+  programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings."org/gnome/shell".enabled-extensions = [
+        "${pkgs.gnomeExtensions.astra-monitor.extensionUuid}"
+      ];
+    }
+  ];
+
   services.libinput = {
     enable = true;
     mouse = {
@@ -250,11 +259,16 @@
       gum
       curl
       btop
+      lm_sensors
+      libgtop
+      gnomeExtensions.astra-monitor
+      gnome-extension-manager
       brightnessctl
       xdotool
       feh
       yaru-theme
       ntfs3g
+      inputs.ai-usagebar.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   fonts = {
