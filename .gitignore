@@ -3,3 +3,4 @@ nix/result
 result
 scripts/__pycache__/
 *.pyc
+docs/superpowers/
