@@ -1,35 +1,16 @@
 #!/usr/bin/env bash
-# Super+Ctrl+N — Thorium tools + NixOS admin (two-level menu: pick category,
-# then Right/Enter opens the submenu; Left returns to the parent menu).
+# Polybar Nix icon — submenu: rebuilds, disk, updates.
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/Projects/dotfiles}"
 TERM_CMD="${TERMINAL:-ghostty}"
-COPY_TABS="$DOTFILES/scripts/copy-incognito-tabs.sh"
-OPEN_LINKS="$DOTFILES/scripts/open-clipboard-links-incognito.py"
+# shellcheck source=lib/polybar-rofi-card.sh
+source "$DOTFILES/scripts/lib/polybar-rofi-card.sh"
 DISK_NOTIFY="$(command -v disk-startup-notify 2>/dev/null || echo "$DOTFILES/scripts/disk-startup-notify.sh")"
 DISK_CLEANUP="$(command -v disk-cleanup 2>/dev/null || echo "$DOTFILES/scripts/disk-cleanup.sh")"
 
-ACCEPT="Right,Control+j,Control+m,Return,KP_Enter"
-
-# Show a rofi menu from stdin, return the selection (empty on Esc/cancel).
-# Rofi 2.0 binds Right to kb-move-char-forward by default; unset it so Right
-# can accept the highlighted row and open submenus.
-pick() {
-  local prompt="$1"
-  rofi -dmenu -i -p "$prompt" \
-    -kb-move-char-forward "" \
-    -kb-accept-entry "$ACCEPT"
-}
-
-# Submenu: Right/Enter accepts; Left cancels and returns empty (go back).
 pick_submenu() {
-  local prompt="$1"
-  rofi -dmenu -i -p "$prompt" \
-    -kb-move-char-forward "" \
-    -kb-move-char-back "" \
-    -kb-cancel "Escape,Control+g,Control+bracketleft,Left" \
-    -kb-accept-entry "$ACCEPT"
+  polybar_rofi_card 6 -p "$1"
 }
 
 run_rebuild() {
@@ -47,15 +28,18 @@ run_rebuild() {
   "
 }
 
-run_update_all() {
-  "$TERM_CMD" --working-directory="$DOTFILES/nix" -e bash -c "
-    $DOTFILES/scripts/nixos-update-all.sh
+run_script() {
+  local script="$1"
+  local label="${2:-Update}"
+  local workdir="${3:-$DOTFILES}"
+  "$TERM_CMD" --working-directory="$workdir" -e bash -c "
+    $(printf '%q' "$script")
     status=\$?
     echo
     if (( status == 0 )); then
-      notify-send -a nixos 'NixOS' 'Full update OK' 2>/dev/null || true
+      notify-send -a nixos '$label' 'OK' 2>/dev/null || true
     else
-      notify-send -a nixos -u critical 'NixOS' \"Update failed (exit \$status)\" 2>/dev/null || true
+      notify-send -a nixos -u critical '$label' \"Failed (exit \$status)\" 2>/dev/null || true
     fi
     read -r -p 'Press Enter to close...' _
   "
@@ -65,7 +49,7 @@ run_disk_cleanup() {
   local confirm
   confirm=$(
     printf '%s\n' "No, keep files" "Yes, clean now" |
-      rofi -dmenu -i -p "Disk cleanup" \
+      polybar_rofi_card_mesg 2 -p "Disk cleanup" \
         -mesg "Removes temp files, trash, caches (~/.cache), npm/pip, and old Nix/logs data.\nDoes not touch ~/.config, ~/Projects, or ~/.pi." \
         -select "No, keep files" 2>/dev/null || true
   )
@@ -78,65 +62,37 @@ run_disk_cleanup() {
   esac
 }
 
-# --- Level 1: categories -----------------------------------------------------
-while true; do
-  category="$(printf '%s\n' "Thorium ▶" "NixOS ▶" | pick "Tools")" || break
+action="$(printf '%s\n' \
+  "Apply configuration (switch)" \
+  "Apply + update flake" \
+  "Build only (no switch)" \
+  "Disk usage (notification)" \
+  "Clean disk now" \
+  "Check for updates" | pick_submenu "NixOS")" || true
 
-  case "$category" in
-    "Thorium ▶")
-      action="$(printf '%s\n' \
-        "Copy Incognito Tab URLs" \
-        "Open Clipboard Links in Incognito" | pick_submenu "Thorium")" || true
-      if [[ -z "${action:-}" ]]; then
-        continue
-      fi
-      case "$action" in
-        "Copy Incognito Tab URLs")
-          "$COPY_TABS"
-          ;;
-        "Open Clipboard Links in Incognito")
-          python3 "$OPEN_LINKS"
-          ;;
-      esac
-      break
-      ;;
-    "NixOS ▶")
-      action="$(printf '%s\n' \
-        "Apply configuration (switch)" \
-        "Apply + update flake" \
-        "Update all (herdr + nixpkgs + rebuild)" \
-        "Build only (no switch)" \
-        "Disk usage (notification)" \
-        "Clean disk now" | pick_submenu "NixOS")" || true
-      if [[ -z "${action:-}" ]]; then
-        continue
-      fi
-      case "$action" in
-        "Apply configuration (switch)")
-          notify-send -a nixos "NixOS" "Opening rebuild…" 2>/dev/null || true
-          run_rebuild
-          ;;
-        "Apply + update flake")
-          notify-send -a nixos "NixOS" "Updating flake + rebuild…" 2>/dev/null || true
-          run_rebuild --pull
-          ;;
-        "Update all (herdr + nixpkgs + rebuild)")
-          notify-send -a nixos "NixOS" "Full update starting…" 2>/dev/null || true
-          run_update_all
-          ;;
-        "Build only (no switch)")
-          notify-send -a nixos "NixOS" "Test build…" 2>/dev/null || true
-          run_rebuild --build
-          ;;
-        "Disk usage (notification)")
-          "$DISK_NOTIFY" || true
-          ;;
-        "Clean disk now")
-          run_disk_cleanup
-          ;;
-      esac
-      break
-      ;;
-    *) break ;;
-  esac
-done
+[[ -n "${action:-}" ]] || exit 0
+
+case "$action" in
+  "Apply configuration (switch)")
+    notify-send -a nixos "NixOS" "Opening rebuild…" 2>/dev/null || true
+    run_rebuild
+    ;;
+  "Apply + update flake")
+    notify-send -a nixos "NixOS" "Updating flake + rebuild…" 2>/dev/null || true
+    run_rebuild --pull
+    ;;
+  "Build only (no switch)")
+    notify-send -a nixos "NixOS" "Test build…" 2>/dev/null || true
+    run_rebuild --build
+    ;;
+  "Disk usage (notification)")
+    "$DISK_NOTIFY" || true
+    ;;
+  "Clean disk now")
+    run_disk_cleanup
+    ;;
+  "Check for updates")
+    notify-send -a nixos "Updates" "Checking Pi, extensions, herdr, ghostty…" 2>/dev/null || true
+    run_script "$DOTFILES/scripts/update.sh" "Updates" "$DOTFILES"
+    ;;
+esac

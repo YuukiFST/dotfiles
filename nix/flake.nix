@@ -6,6 +6,7 @@
     herdr.url = "github:ogulcancelik/herdr/v0.8.0";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     custom-packages.url = "github:Rishabh5321/custom-packages-flake";
+    ai-usagebar.url = "github:akitaonrails/ai-usagebar";
   };
 
   outputs =

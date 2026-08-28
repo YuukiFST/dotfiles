@@ -50,7 +50,6 @@ Super+Escape          System menu
 Super+K               This list
 Super+Ctrl+L          Lock
 Super+Ctrl+Shift+Space  Pick theme
-Super+Ctrl+N            Tools (Thorium + NixOS)
 Super+Ctrl+Space      Pick background
 Super+Ctrl+A          Audio
 Super+Ctrl+B          Bluetooth

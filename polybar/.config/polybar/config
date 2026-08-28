@@ -62,7 +62,7 @@ font-1 = Terminess Nerd Font:size=12;3
 ; Modules
 modules-left   = i3
 modules-center = datetime
-modules-right  = network lock logout poweroff
+modules-right  = thorium nixos sysmon aibar network lock logout poweroff
 
 ; Cursor actions
 cursor-click  = pointer
@@ -262,6 +262,37 @@ animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
+
+[module/thorium]
+type = custom/text
+content = 
+content-padding = 2
+click-left = $HOME/Projects/dotfiles/scripts/thorium-menu.sh
+click-right = $HOME/Projects/dotfiles/scripts/thorium-menu.sh
+
+[module/nixos]
+type = custom/text
+content = 
+content-padding = 2
+click-left = $HOME/Projects/dotfiles/scripts/nixos-menu.sh
+
+[module/sysmon]
+type = custom/script
+exec = ~/.config/polybar/scripts/sysmon.sh
+interval = 2
+label = %output%
+label-padding = 4
+label-foreground = ${colors.cyan}
+click-left = $HOME/Projects/dotfiles/scripts/sysmon-btop.sh
+
+[module/aibar]
+type = custom/script
+exec = ~/.config/polybar/scripts/ai-usage.sh
+interval = 300
+label = %output%
+label-padding = 4
+label-foreground = ${colors.yellow}
+click-left = $HOME/Projects/dotfiles/scripts/ai-usage-tui.sh
 
 [module/cpu]
 type = internal/cpu

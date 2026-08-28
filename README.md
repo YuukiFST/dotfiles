@@ -24,14 +24,14 @@ Copies `nix/` to `/etc/nixos`, rebuilds, then stows dotfiles.
 
 System config lives in `nix/`. Edit `nix/configuration.nix`, then rebuild:
 
-- `Super+Ctrl+N` → Tools menu (NixOS rebuild, disk cleanup, Thorium scripts)
+- Polybar: Thorium and Nix icons (rebuild, disk cleanup, updates)
 - or `./scripts/nixos-rebuild.sh`
 
 Disk cleanup and login notifications are built into this repo under `nix/disk-startup-notify/` (no extra clone needed).
 
 ## Stow packages
 
-`doom`, `fish`, `ghostty`, `gitconfig`, `herdr`, `i3`, `nvim`, `picom`, `polybar`, `rofi`, `ssh`, `tmux`, `zsh`
+`ai-usagebar`, `doom`, `fish`, `ghostty`, `gitconfig`, `herdr`, `i3`, `nvim`, `picom`, `polybar`, `rofi`, `ssh`, `tmux`, `zsh`
 
 Each package mirrors `$HOME` layout (e.g. `i3/.config/i3/` → `~/.config/i3/`).
 
@@ -45,7 +45,6 @@ i3, Ghostty, Thorium, Doom Emacs, Neovim, Rofi, Polybar, Picom
 |-----|--------|
 | `Super+Return` | Terminal |
 | `Super+Space` | App launcher |
-| `Super+Ctrl+N` | Tools (Thorium + NixOS) |
 | `Super+K` | Hotkey list |
 | `F1` | Emacs |
 

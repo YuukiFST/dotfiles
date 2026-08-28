@@ -12,11 +12,14 @@ if ! "$FLOCK" -n 9; then
   exit 0
 fi
 
+# NixOS wraps polybar as .polybar-wrapped — pkill -x polybar misses it.
+POLYBAR_MATCH='[/]polybar( |$)'
+
 # Terminate already running bars
-"$PKILL" -x polybar 2>/dev/null || true
+"$PKILL" -f "$POLYBAR_MATCH" 2>/dev/null || true
 
 # Wait until bars have been terminated
-while "$PGREP" -u "$UID" -x polybar >/dev/null; do sleep 0.2; done
+while "$PGREP" -u "$UID" -f "$POLYBAR_MATCH" >/dev/null; do sleep 0.2; done
 
 # Launch Polybar on each monitor
 for m in $("$POLYBAR" --list-monitors | cut -d":" -f1); do
